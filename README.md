@@ -12,4 +12,5 @@ make
 or
 
 make
+
 python3 runTest.py
