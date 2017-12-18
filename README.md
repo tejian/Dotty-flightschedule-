@@ -1,6 +1,7 @@
 # Dotty-flightschedule-
 
 make
+
 ./airSche.exe < Benchmark/__nameoftestfile
 
 
