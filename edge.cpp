@@ -1,8 +1,8 @@
 #include "edge.h"
 
-Edge::Edge (int p_from, int p_to, int p_capacity, int p_flow)
+Edge::Edge (int p_from, int p_to, int p_capacity, int p_flow, int p_id)
 	: m_from (p_from), m_to (p_to), m_capacity (p_capacity),
-	  m_curFlow (p_flow)
+	  m_curFlow (p_flow), m_id (p_id)
 {
 
 }
@@ -20,6 +20,11 @@ int Edge::setCapacity (int p_capacity)
 int Edge::getTo() const
 {
 	return m_to;
+}
+
+int Edge::getID() const
+{
+	return m_id;
 }
 
 int Edge::getFrom() const

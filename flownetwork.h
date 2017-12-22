@@ -20,9 +20,9 @@ class FlowNetwork
 			clear();
 		}
 
-		Edge* addEdge (int p_from, int p_to, int p_capacity, int p_flow = 0)
+		Edge* addEdge (int p_from, int p_to, int p_capacity, int p_flow, int p_id = -1)
 		{
-			Edge* e = new Edge (p_from, p_to, p_capacity, p_flow);
+			Edge* e = new Edge (p_from, p_to, p_capacity, p_flow, p_id);
 
 			m_graph[p_from].push_back (e);
 			m_graph[p_to  ].push_back (e);
