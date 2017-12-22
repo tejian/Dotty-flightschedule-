@@ -9,6 +9,7 @@ Theres another simple test file in try.txt
 -----------------------------------------------
 
 usage
+
 make
 
 ./airSche.exe < Benchmark/__nameoftestfile
@@ -23,9 +24,11 @@ python3 runTest.py
 -------------------------------------------------------------
 
 todo:
+
 checker program that checks if the solution is correct or not
 
-version2 question
-basically is the same as version only need to modify graph modeling and printing soution part.
+version2 question basically is the same as version one,
+
+only need to modify graph modeling and printing soution part.
 
 
