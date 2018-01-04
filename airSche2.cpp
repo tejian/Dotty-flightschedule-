@@ -7,7 +7,7 @@
 #include <set>
 
 
-void printPath (int curr, Graph& g, int supplyPilot);
+void printPath (int curr, Graph& g, int supplyPilot, std::vector <bool> visited);
 
 int main()
 {
@@ -134,8 +134,8 @@ int main()
 	// restore flow on flights
 	for (auto a : flightEdges)
 	{
-		a -> setFlow (1);
-		a -> setCapacity (1);
+		a -> setFlow (a -> getFlow() + 1 );
+		//a -> setCapacity (1);
 	}
 	Graph& g = fn.getGraph();
 	// make sure theres no path to supersink
@@ -146,17 +146,21 @@ int main()
 	}
 
 	// print unique paths from supply to demand printing only flight ids
+	std::vector <bool> visited (flights.size() + 1, false);
 	for (int i = 0; i < g[supplyPilot].size(); ++i)
 	{
 		if (g[supplyPilot][i]-> getFrom() != supplyPilot) 
 			continue;
 		if (g[supplyPilot][i] -> getFlow() < 1)
 			continue;
-		printPath (g[supplyPilot][i] -> getTo(), g, demandPilot);
+
+		// print pant and reduce flow
+		printPath (g[supplyPilot][i] -> getTo(), g, demandPilot, visited);
+		g[supplyPilot][i] -> setFlow (g[supplyPilot][i] -> getFlow() - 1);
 	}
 }
 
-void printPath (int curr, Graph& g, int demandPilot)
+void printPath (int curr, Graph& g, int demandPilot, std::vector <bool> visited)
 {	
 	// if we reached supply pilot we return
 	if (curr == demandPilot)
@@ -173,10 +177,13 @@ void printPath (int curr, Graph& g, int demandPilot)
 			// reduce flow so it cant be traversed next time
 			g[curr][i] -> setFlow (g[curr][i] -> getFlow() - 1);
 			// print result if edge represents a flight
-			if (g[curr][i] -> getID() > 0)
+			if (g[curr][i] -> getID() > 0 && !visited[g[curr][i] -> getID()])
+			{
 				std::cout << g[curr][i] -> getID() << " ";
+				visited[g[curr][i] -> getID()] = true;
+			}
 			// follow along
-			printPath (g[curr][i] -> getTo(), g, demandPilot);
+			printPath (g[curr][i] -> getTo(), g, demandPilot, visited);
 
 			return;
 		}
